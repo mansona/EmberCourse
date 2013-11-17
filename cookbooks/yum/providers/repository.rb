@@ -104,25 +104,6 @@ def repo_config
     cookbook 'yum'
     source 'repo.erb'
     mode '0644'
-    variables(
-      repo_name: new_resource.repo_name,
-      description: new_resource.description,
-      url: new_resource.url,
-      mirrorlist: new_resource.mirrorlist,
-      key: new_resource.key,
-      enabled: new_resource.enabled,
-      type: new_resource.type,
-      failovermethod: new_resource.failovermethod,
-      bootstrapurl: new_resource.bootstrapurl,
-      includepkgs: new_resource.includepkgs,
-      exclude: new_resource.exclude,
-      priority: new_resource.priority,
-      metadata_expire: new_resource.metadata_expire,
-      type: new_resource.type,
-      proxy: new_resource.proxy,
-      proxy_username: new_resource.proxy_username,
-      proxy_password: new_resource.proxy_password
-      )
     if new_resource.make_cache
       notifies :run, "execute[yum-makecache-#{new_resource.repo_name}]", :immediately
       notifies :create, "ruby_block[reload-internal-yum-cache-for-#{new_resource.repo_name}]", :immediately
